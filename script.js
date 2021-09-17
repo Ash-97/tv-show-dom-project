@@ -1,16 +1,47 @@
 //You can edit ALL of the code here
+/*--------------------- Fetch Function To Get The Data For All The Episodes ---------------------*/
+function fetchAllEpisodes() {
+  fetch("https://api.tvmaze.com/shows/82/episodes")
+    .then((response) => {
+      if (response.status >= 200 && response.status <= 299) {
+        return response.json();
+      }
+    })
+    .then((data) => {
+      if (!localStorage.getItem("episodes")) {
+        localStorage.setItem("episodes", JSON.stringify(data));
+      }
+    })
+    .catch((error) => console.error("Error Occurred:", error));
+}
+fetchAllEpisodes();
 
-const allEpisodes = getAllEpisodes();
+// async function fetchAllEpisodesData() {
+//   const response = await fetch("https://api.tvmaze.com/shows/82/episodes");
+//   const data = await response.json();
+//   return data;
+// }
 
+// if (!localStorage.getItem("episodes")) {
+//   fetchAllEpisodesData().then((data) =>
+//     localStorage.setItem("episodes", JSON.stringify(data))
+//   );
+// }
+
+const allEpisodesString = localStorage.getItem("episodes");
+const allEpisodesArray = JSON.parse(allEpisodesString);
+
+/*--------------------- Function For Setup On Load ---------------------*/
 function setup() {
-  makePageForEpisodes(allEpisodes);
-  episodeSelectorMenu(allEpisodes);
+  makePageForEpisodes(allEpisodesArray);
+  episodeSelectorMenu(allEpisodesArray);
 }
 
+/*--------------------- Function To Create Episode Cards ---------------------*/
 function makePageForEpisodes(episodeList) {
   const rootEl = document.getElementById("root");
   const totalNumber = document.getElementById("totalNumberOfEpisodes");
-  totalNumber.innerText = `Displaying ${episodeList.length}/${allEpisodes.length} episode(s)`;
+  totalNumber.innerText = `Displaying ${episodeList.length}/${allEpisodesArray.length} episode(s)`;
   rootEl.textContent = "";
   episodeList.forEach((element) => {
     /*--------------------- Episode Cards ---------------------*/
@@ -40,7 +71,7 @@ function makePageForEpisodes(episodeList) {
 
     /*--------------------- Episode Summary ---------------------*/
 
-    let summaryEl = document.createElement("p");
+    let summaryEl = document.createElement("section");
     episodeCardEl.appendChild(summaryEl);
     summaryEl.setAttribute("class", "summary");
     summaryEl.innerHTML = `${element.summary}`;
@@ -67,7 +98,7 @@ searchBar.addEventListener("input", searchFilter);
 function searchFilter(event) {
   event.preventDefault();
   let searchInput = event.target.value.toLowerCase();
-  let filteredSearchResults = allEpisodes.filter((episode) => {
+  let filteredSearchResults = allEpisodesArray.filter((episode) => {
     return (
       episode.name.toLowerCase().includes(searchInput) ||
       episode.summary.toLowerCase().includes(searchInput)
@@ -100,10 +131,19 @@ function episodeSelectorMenu(episodeList) {
 function selectFilter() {
   const usersOptionValue = document.querySelector("select");
   var selectedValue = usersOptionValue.value;
-  const filterUserSelectedEpisode = allEpisodes.filter((episode) => {
+  const filterUserSelectedEpisode = allEpisodesArray.filter((episode) => {
     return episode.name.includes(selectedValue);
   });
   makePageForEpisodes(filterUserSelectedEpisode);
 }
+
+/*--------------------- Function For Show All Episodes Button ---------------------*/
+const showAllButtonEl = document.createElement("button");
+searchBoxDiv.appendChild(showAllButtonEl);
+showAllButtonEl.setAttribute("id", "showAllBtn");
+showAllButtonEl.innerText = "Show All Episodes";
+showAllButtonEl.addEventListener("click", () => {
+  makePageForEpisodes(allEpisodesArray);
+});
 
 window.onload = setup;
