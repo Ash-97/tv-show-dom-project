@@ -28,17 +28,34 @@ body {
   width: 5%;
 }
 
-select {
+/*--------------------- Selector Menus ---------------------*/
+
+#showSelectorDropdown {
   width: 30%;
   height: 35px;
   position: absolute;
-  top: 20%;
+  top: 21%;
   left: 2%;
   border: 1px solid grey;
   border-radius: 10px;
   text-align: center;
   font-size: 16px;
 }
+
+#episodeSelectorDropdown {
+  display: none;
+  width: 30%;
+  height: 35px;
+  position: absolute;
+  top: 21%;
+  right: 2%;
+  border: 1px solid grey;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 16px;
+}
+
+/*--------------------- Search Bar ---------------------*/
 
 #searchBar {
   width: 20%;
@@ -52,7 +69,9 @@ select {
   font-size: 16px;
 }
 
-#showAllBtn {
+/*--------------------- View All Shows Button ---------------------*/
+
+#viewAllShowsBtn {
   width: 15%;
   height: 35px;
   background-color: var(--secondary-color);
@@ -68,19 +87,100 @@ select {
   color: var(--font-color);
 }
 
-#showAllBtn:hover {
+#viewAllShowsBtn:hover {
   color: black;
   background-color: var(--tertiary-color);
   cursor: pointer;
 }
 
-#totalNumberOfEpisodes {
+/*--------------------- Number Of Content Displayed Message  ---------------------*/
+
+#totalNumberOfShowsAndEpisodes {
   text-align: center;
   width: 100%;
   margin-top: 10%;
   color: var(--font-color);
   font-weight: bold;
 }
+
+/*--------------------- Show Card ---------------------*/
+
+.showCard {
+  border-radius: 10px;
+  max-width: 95%;
+  margin: 1rem 2rem;
+  padding: 25px 10px;
+  box-shadow: 0px 0px 20px rgba(250, 250, 250, 1);
+  transition: 1s;
+}
+.showCard:hover {
+  background-color: var(--tertiary-color);
+  box-shadow: 2px 2px 20px rgba(226, 3, 3, 1);
+}
+
+.showTitle {
+  font-size: 25px;
+  text-align: center;
+  border: 1px solid grey;
+  border-radius: 50px;
+  margin-top: 0%;
+  padding: 1rem 0px;
+  background-color: var(--secondary-color);
+  color: var(--font-color);
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.showCardMainTags {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 0 3.5rem;
+}
+
+.showCardMainTags img {
+  width: 200px;
+}
+
+.showImg {
+  width: 30%;
+  margin: 0 10px 0 0;
+}
+
+.showSummary {
+  width: 48%;
+  margin-right: 10px;
+  padding: 1rem;
+}
+
+.info {
+  position: relative;
+  width: 23%;
+  padding: 1rem;
+}
+
+.info a {
+  position: absolute;
+  top: 220px;
+  right: 45px;
+  text-decoration: none;
+  color: white;
+  font-family: inherit;
+  background-color: rgb(60, 148, 139);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.info h2 {
+  font-weight: 300;
+  font-size: 2rem;
+}
+
+.info a:hover {
+  color: lawngreen;
+}
+
+/*--------------------- Episode Card ---------------------*/
 
 .episodeCard {
   width: 30%;
@@ -97,6 +197,8 @@ select {
   box-shadow: 2px 2px 20px rgba(226, 3, 3, 1);
 }
 
+/*--------------------- Episode Title ---------------------*/
+
 .episodeTitle {
   border: 1px solid grey;
   border-radius: 50px;
@@ -107,19 +209,27 @@ select {
   cursor: pointer;
 }
 
+/*--------------------- Episode Link ---------------------*/
+
 .episode-link {
   text-decoration: none;
   color: var(--font-color);
   font-weight: bold;
 }
 
-img {
+/*--------------------- Episode Img ---------------------*/
+
+.episodeImg {
   max-width: 98%;
 }
 
-.summary {
+/*--------------------- Episode Summary ---------------------*/
+
+.episodeSummary {
   padding: 0px 10px;
 }
+
+/*--------------------- Footer ---------------------*/
 
 footer {
   text-align: center;
